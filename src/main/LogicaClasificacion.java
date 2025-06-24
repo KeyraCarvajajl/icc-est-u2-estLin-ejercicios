@@ -5,60 +5,94 @@ import java.util.*;
 public class LogicaClasificacion {
 
     /**
-     * Invierte una cadena de texto utilizando una pila (Stack).
-     *
-     * @param texto Cadena original a invertir.
-     * @return Cadena invertida.
-     *
-     *         Ejemplo:
-     *         Entrada: "Hola Mundo"
-     *         Salida: "odnuM aloH"
+     * Utiliza una pila (Stack) para invertir el orden de los caracteres de una cadena.
+     * Apila cada carácter y luego desapila para formar la cadena invertida.
      */
     public String invertirCadena(String texto) {
-        return "";
+        Stack<Character> pila = new Stack<>();
+        for (char c : texto.toCharArray()) {
+            pila.push(c);
+        }
+
+        StringBuilder resultado = new StringBuilder();
+        while (!pila.isEmpty()) {
+            resultado.append(pila.pop());
+        }
+
+        return resultado.toString();
     }
 
     /**
-     * Verifica si los símbolos de paréntesis, corchetes y llaves están bien
-     * balanceados.
-     *
-     * @param expresion Cadena con símbolos.
-     * @return true si está balanceada, false en caso contrario.
-     *
-     *         Ejemplo:
-     *         Entrada: "{[()]}"
-     *         Salida: true
+     * Usa una pila para verificar si los símbolos de apertura y cierre () {} []
+     * están correctamente balanceados. Apila los símbolos de apertura y verifica
+     * que cada cierre coincida con el tope de la pila.
      */
     public boolean validarSimbolos(String expresion) {
-        return false;
+        Stack<Character> pila = new Stack<>();
+        Map<Character, Character> mapa = Map.of(
+            ')', '(', 
+            ']', '[', 
+            '}', '{'
+        );
+
+        for (char c : expresion.toCharArray()) {
+            if (mapa.containsValue(c)) {
+                pila.push(c);
+            } else if (mapa.containsKey(c)) {
+                if (pila.isEmpty() || !pila.pop().equals(mapa.get(c))) {
+                    return false;
+                }
+            }
+        }
+
+        return pila.isEmpty();
     }
 
     /**
-     * Ordena una pila de enteros en orden ascendente usando otra pila auxiliar.
-     *
-     * @return Lista ordenada.
-     *
-     *         Ejemplo:
-     *         Entrada: [3, 1, 4, 2]
-     *         Salida: [1, 2, 3, 4]
+     * Ordena una pila de enteros en orden ascendente usando solo otra pila auxiliar.
+     * Inserta los elementos en la pila auxiliar en el lugar correcto, simulando
+     * el ordenamiento de cartas en la mano.
      */
     public List<Integer> ordenarPila(Stack<Integer> pila) {
+        Stack<Integer> auxiliar = new Stack<>();
 
-        return new ArrayList<>();
+        while (!pila.isEmpty()) {
+            Integer temporal = pila.pop();
+
+            while (!auxiliar.isEmpty() && auxiliar.peek() > temporal) {
+                pila.push(auxiliar.pop());
+            }
+
+            auxiliar.push(temporal);
+        }
+
+        List<Integer> resultado = new ArrayList<>();
+        while (!auxiliar.isEmpty()) {
+            resultado.add(auxiliar.pop());
+        }
+
+        return resultado;
     }
 
     /**
-     * Clasifica una lista de enteros separando pares e impares.
-     * Usa LinkedList para mantener el orden de inserción.
-     *
-     * @return Lista con pares primero, luego impares.
-     *
-     *         Ejemplo:
-     *         Entrada: [1, 2, 3, 4, 5, 6]
-     *         Salida: [2, 4, 6, 1, 3, 5]
+     * Separa los números pares e impares de una lista, manteniendo el orden original.
+     * Devuelve una lista con los pares primero y luego los impares.
      */
     public List<Integer> clasificarPorParidad(LinkedList<Integer> original) {
+        LinkedList<Integer> pares = new LinkedList<>();
+        LinkedList<Integer> impares = new LinkedList<>();
 
-        return new ArrayList<>();
+        for (Integer numero : original) {
+            if (numero % 2 == 0) {
+                pares.add(numero);
+            } else {
+                impares.add(numero);
+            }
+        }
+
+        List<Integer> resultado = new LinkedList<>();
+        resultado.addAll(pares);
+        resultado.addAll(impares);
+        return resultado;
     }
 }

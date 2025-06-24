@@ -12,29 +12,39 @@ public class App {
         var estudiante = StudentValidator.validarDatos();
         System.out.println("👤 Estudiante: " + estudiante.nombre());
         System.out.println("✉️  Correo: " + estudiante.correo());
+
         // NO MODIFICAR HASTA AQUÍ
 
         LogicaClasificacion logica = new LogicaClasificacion();
-        // Probar invertirCadena
-        String texto = "Hola Mundo";
-        String invertido = logica.invertirCadena(texto);
-        System.out.println("invertirCadena(\"" + texto + "\"): " + invertido);
 
-        // Probar validarSimbolos
+//------------------------------------ Probar invertirCadena
+
+        String texto = "Hola Mundo";
+        String invertido = logica.invertirCadena(texto);    
+        System.out.println("\n invertirCadena(\"" + texto + "\"): " + invertido);
+        System.out.println("\n---------------------------------------------------------------");
+
+
+//------------------------------------- Probar validarSimbolos
         String expresion = "{[()]}";
         boolean balanceado = logica.validarSimbolos(expresion);
-        System.out.println("validarSimbolos(\"" + expresion + "\"): " + balanceado);
+        System.out.println("\n validarSimbolos(\"" + expresion + "\"): " + balanceado);
+        System.out.println("\n---------------------------------------------------------------");
 
-        // Probar ordenarPila
+//-------------------------------------- Probar ordenarPila
         Stack<Integer> pila = new Stack<>();
         pila.push(3);
         pila.push(1);
         pila.push(4);
         pila.push(2);
-        System.out.println("ordenarPila([3, 1, 4, 2]): " + logica.ordenarPila(pila));
+        System.out.println("\n ordenarPila([3, 1, 4, 2]): " + logica.ordenarPila(pila));
+        System.out.println("\n---------------------------------------------------------------");
 
-        // Probar clasificarPorParidad
+
+//-------------------------------------- Probar clasificarPorParidad
         LinkedList<Integer> original = new LinkedList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        System.out.println("clasificarPorParidad([1, 2, 3, 4, 5, 6]): " + logica.clasificarPorParidad(original));
+        System.out.println("\n clasificarPorParidad([1, 2, 3, 4, 5, 6]): " + logica.clasificarPorParidad(original));
+        System.out.println("\n----------------------------------------------------------------");
+
     }
 }
